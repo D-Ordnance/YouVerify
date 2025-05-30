@@ -1,4 +1,4 @@
-package com.deeosoft.youverifytest.feature.registration.presentation.page
+package com.deeosoft.youverifytest.feature.login.presentation.page
 
 import android.content.Intent
 import android.os.Bundle
@@ -20,8 +20,11 @@ import com.deeosoft.youverifytest.R
 import com.deeosoft.youverifytest.core.composable.OnboardActions
 import com.deeosoft.youverifytest.core.composable.YouVerifyText
 import com.deeosoft.youverifytest.core.composable.YouVerifyTextField
+import com.deeosoft.youverifytest.core.helper.PreferenceHelper
+import com.deeosoft.youverifytest.feature.registration.presentation.page.Registration
+import com.deeosoft.youverifytest.feature.registration.presentation.page.VerifyEmail
 
-class Registration : ComponentActivity() {
+class Login : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +35,7 @@ class Registration : ComponentActivity() {
                         Row(modifier = Modifier.padding(bottom = 8.dp)) {
                             YouVerifyText(
                                 modifier = Modifier.padding(end = 8.dp),
-                                content = "Let\'s get started!",
+                                content = "Welcome back",
                                 fontSize = 22.sp,
                                 lineHeight = 32.sp,
                                 color = R.color.titleColor
@@ -44,31 +47,13 @@ class Registration : ComponentActivity() {
                         }
                         YouVerifyText(
                             modifier = Modifier.padding(bottom = 32.dp),
-                            content = "Join us and start managing your finances with Fintrack today.",
+                            content = "Sign in to your account and start managing your finances with Fintrack today.",
                             fontSize = 18.sp,
                             lineHeight = 26.sp,
                             color = R.color.titleColor
                         )
 
-                        val fullNameState = remember { mutableStateOf("") }
                         val emailState = remember { mutableStateOf("") }
-                        YouVerifyTextField(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(bottom = 24.dp),
-                            title = "First & Last Name",
-                            placeholder = {
-                                YouVerifyText(
-                                    content = "e.g John Doe",
-                                    color = R.color.placeholderColor
-                                )
-                            },
-                            value = fullNameState.value,
-                            fontSize = 16.sp,
-                            lineHeight = 23.sp
-                        ) {
-                            fullNameState.value = it
-                        }
                         YouVerifyTextField(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -86,31 +71,14 @@ class Registration : ComponentActivity() {
                         ) {
                             emailState.value = it
                         }
-                        YouVerifyTextField(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(bottom = 24.dp),
-                            title = "Enter a referral code(optional)",
-                            placeholder = {
-                                YouVerifyText(
-                                    content = "e.g email@mail.com",
-                                    color = R.color.placeholderColor
-                                )
-                            },
-                            value = emailState.value,
-                            fontSize = 16.sp,
-                            lineHeight = 23.sp
-                        ) {
-                            emailState.value = it
-                        }
                     }
 
                     OnboardActions(
-                        { signUp() },
                         { login() },
-                        "Create an account",
-                        "Already have an account? ",
-                        "Sign In"
+                        { signUp() },
+                        "Sign In",
+                        "Do not have an account? ",
+                        "Sign Up"
                     )
                 }
             }
@@ -118,10 +86,12 @@ class Registration : ComponentActivity() {
     }
 
     private fun signUp() {
-        startActivity(Intent(this, VerifyEmail::class.java))
+        startActivity(Intent(this, Registration::class.java))
+        finish()
     }
 
     private fun login() {
-
+        startActivity(Intent(this, VerifyEmail::class.java))
+        finish()
     }
 }

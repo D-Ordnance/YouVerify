@@ -7,4 +7,6 @@
     <color name="titleColor">#FF0C111D</color>
     <color name="placeholderColor">#FF94969C</color>
     <color name="textFieldOutlineColor">#FFECECED</color>
+    <color name="pinInputColor">#FFCECFD2</color>#F5F5F6
+    <color name="pinInputBackgroundColor">#FFF5F5F6</color>
 </resources>
